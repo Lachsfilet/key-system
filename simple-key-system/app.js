@@ -1,42 +1,36 @@
-const express = require('express')
-const config = require('./config.json');
+const express = require("express");
+const fs = require("fs");
 
-const app = express()
+const app = express();
 
 function renewApiKey() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const keyLength = 32;
-  let apiKey = '';
+  let apiKey = "";
 
   for (let i = 0; i < keyLength; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     apiKey += characters.charAt(randomIndex);
   }
 
-  return apiKey;
+  // Write the apiKey to apikey.json
+  fs.writeFile("apikey.json", JSON.stringify({ apiKey }), (err) => {
+    if (err) {
+      console.error('Error writing apiKey file:', err);
+    } else {
+      console.log('apiKey file updated successfully.');
+    }
+  });
 }
 
+app.get("/create-key", (request, response) => {
+  renewApiKey();
+  response.send("API Key created and written to apikey.json");
+});
 
+const port = 3000;
 
-
-function generateProductKey() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const keyLength = 16; // You can adjust the length of the key
-  let productKey = '';
-
-  for (let i = 0; i < keyLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    productKey += characters.charAt(randomIndex);
-  }
-
-  const formattedKey = productKey.replace(/(.{4})/g, '$1-').slice(0, -1);
-  return formattedKey;
-}
-
-app.get('/create-key', (request, response) => {
- 
-})
-
-app.listen(config.port, () => {
-    console.log(`Server is Listening on ${config.port}`)
-})
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
