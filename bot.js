@@ -17,16 +17,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const apiUrl = 'http://localhost:3000/create-key';
 
-(async () => {
-  try {
-    console.log('Started refreshing application (/) commands.');
-    await rest.put(Routes.applicationCommands(config.client_id), { body: commands });
-    console.log('Successfully reloaded application (/) commands.');
-  } catch (error) {
-    console.error('Error refreshing application (/) commands:', error.message);
-  }
-})();
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
