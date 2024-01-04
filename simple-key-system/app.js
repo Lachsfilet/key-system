@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 
 const config = require("./config.json");
-const theKey = require("./apikey.json");
+const api = require("./apikey.json");
 
 const app = express();
 
@@ -50,7 +50,7 @@ app.post('/create-key', (req, res) => {
     return res.status(400).json({ error: 'API key is required in the request body' });
   }
 
-  if (apiKey === theKey.apiKey) {
+  if (apiKey === api.apiKey) {
     return res.status(200).json({ productKey: generateProductKey() });
   } else {
     return res.status(400).json({ error: 'API key is invalid' });

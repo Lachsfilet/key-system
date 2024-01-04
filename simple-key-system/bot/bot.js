@@ -6,8 +6,8 @@ const { Client, GatewayIntentBits } = require('discord.js');
 
 const commands = [
   {
-    name: 'ping',
-    description: 'Replies with Pong!',
+    name: 'create-key',
+    description: 'creates a product key',
   },
 ];
 
