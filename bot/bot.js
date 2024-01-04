@@ -1,7 +1,7 @@
 const { REST, Routes } = require('discord.js');
 const axios = require('axios');
-const config = require('../config.json');
-const api = require('../apikey.json');
+const config = require('../simple-key-system/config.json');
+const api = require('../simple-key-system/apikey.json');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const commands = [
