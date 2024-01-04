@@ -36,7 +36,7 @@ client.on('interactionCreate', async (interaction) => {
 
   const { commandName } = interaction;
 
-  if (commandName === 'ping') {
+  if (commandName === 'create-key') {
     try {
       const response = await axios.post(apiUrl, { apiKey: api.apiKey });
       console.log('API Response:', response.data);
