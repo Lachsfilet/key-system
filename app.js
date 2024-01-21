@@ -17,7 +17,6 @@ function renewApiKey() {
     apiKey += characters.charAt(randomIndex);
   }
 
-  // Write the apiKey to apikey.json
   fs.writeFile("apikey.json", JSON.stringify({ apiKey }), (err) => {
     if (err) {
       console.error('Error writing apiKey file:', err);
@@ -29,7 +28,7 @@ function renewApiKey() {
 
 function generateProductKey() {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const keyLength = 16; // You can adjust the length of the key
+  const keyLength = 16;
   let productKey = "";
 
   for (let i = 0; i < keyLength; i++) {
@@ -41,7 +40,7 @@ function generateProductKey() {
   return formattedKey;
 }
 
-app.use(express.json()); // Middleware to parse JSON in the request body
+app.use(express.json());
 
 app.post('/create-key', (req, res) => {
   const { apiKey } = req.body;
