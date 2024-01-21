@@ -36,6 +36,8 @@ function generateProductKey() {
     productKey += characters.charAt(randomIndex);
   }
 
+  renewApiKey()
+
   const formattedKey = productKey.replace(/(.{4})/g, "$1-").slice(0, -1);
   return formattedKey;
 }
